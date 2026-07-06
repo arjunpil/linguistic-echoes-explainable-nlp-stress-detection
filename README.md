@@ -54,9 +54,7 @@ linguistic-echoes-explainable-nlp-stress-detection/
 
 ## Dataset
 
-The full Dataset can be found here: https://huggingface.co/datasets/arjunpil/linguistic-echoes-explainable-nlp-stress-detection
-It contains the Dreaddit and the Reddit Student responses from many different subreddits.
-You can download it and adjust the file pathing within the file per your circumstances.
+The full Dataset can be found here: https://huggingface.co/datasets/arjunpil/linguistic-echoes-explainable-nlp-stress-detection. It contains the Dreaddit and the Reddit Student responses from many different subreddits. You can download it and adjust the file pathing within the file per your circumstances.
 
 ---
 
@@ -72,10 +70,10 @@ Others: pandas, numpy, scikit-learn
 
 ## Results
 
-Best Model: DistilBERT → 79% Accuracy, 0.874 ROC-AUC
-Strong convergence between SHAP, LIME, and LIWC on first-person singular pronouns and negative emotion
-Significant linguistic differences across academic communities (p < 0.001 after correction)
-Full paper and quad chart available in the reports/ folder.
+- Best Model: DistilBERT → 79% Accuracy, 0.874 ROC-AUC
+- Strong convergence between SHAP, LIME, and LIWC on first-person singular pronouns and negative emotion
+- Significant linguistic differences across academic communities (p < 0.001 after correction)
+- Full paper and quad chart available in the reports/ folder.
 ---
 
 ## License
