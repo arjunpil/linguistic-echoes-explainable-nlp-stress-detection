@@ -23,32 +23,33 @@ The project explores whether modern NLP models can recover established psycholin
 
 ## Repository Structure
 
+```bash
 linguistic-echoes-explainable-nlp-stress-detection/
-├── data/                    # (Not stored here - see Dataset section)
-├── scripts/               # Main analysis notebooks
+├── data/                          # Dataset (samples only - full version on Hugging Face)
+├── scripts/                       # Main analysis scripts
 │   ├── 01_data_collection.py
 │   ├── 02_eda.py
 │   ├── 03_baseline_model.py
-|   ├── 04_transformer_model.py           # Ran on Kaggle
-|   ├── 05_interpretability.py
-|   ├── 06_error_analysis.py
-|   ├── 07_subreddit_analysis.py
+│   ├── 04_transformer_model.py
+│   ├── 05_interpretability.py
+│   ├── 06_error_analysis.py
+│   ├── 07_subreddit_analysis.py
 │   └── 08_additional_analysis.py
-├── outputs/                     # Python scripts
+├── outputs/                       # Generated results
 │   ├── figures/
-    ├── models/
-    ├── error_analysis_results.csv
-    ├── high_stress_student_posts.csv
-    ├── statistical_tests.csv
-    ├── subreddit_linguistic_profile.csv
-├── reports/
-    ├── HSS_TeamMechInterp_LinguisticEchoesExplainableNLPforAcademicStressDetection_Paper.pdf
-    ├── HSS_TeamMechInterp_LinguisticEchoesExplainableNLPforAcademicStressDetection_QuadChart.pdf
-    ├── hss_linguisticechoes_quadchart.html                      #HTML to generate PDF
+│   ├── models/
+│   ├── error_analysis_results.csv
+│   ├── high_stress_student_posts.csv
+│   ├── statistical_tests.csv
+│   └── subreddit_linguistic_profile.csv
+├── reports/                       # Project documents
+│   ├── HSS_TeamMechInterp_LinguisticEchoesExplainableNLPforAcademicStressDetection_Paper.pdf
+│   ├── HSS_TeamMechInterp_LinguisticEchoesExplainableNLPforAcademicStressDetection_QuadChart.pdf
+│   └── hss_linguisticechoes_quadchart.html
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
+```
 ---
 
 ##Dataset
