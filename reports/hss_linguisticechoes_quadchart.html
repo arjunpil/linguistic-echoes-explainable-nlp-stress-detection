@@ -1,1 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      background: #fff;
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+    }
+
+    /* ── Title bar ── */
+    .title-bar {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 9px 14px 7px;
+      border-bottom: 3px solid #e63946;
+    }
+
+    .title-bar h1 {
+      font-size: 11.2pt;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .title-bar .meta {
+      font-size: 7.5pt;
+      color: #a8c4e0;
+      margin-top: 4px;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: calc(297mm - 58px);
+    }
+
+    .quadrant {
+      padding: 11px 13px 10px;
+      border: 1px solid #c8d8e8;
+      overflow: hidden;
+    }
+
+    .quadrant:nth-child(1) {
+      background: #f7fbff;
+      border-top: none;
+      border-left: none;
+    }
+
+    .quadrant:nth-child(2) {
+      background: #fff9f9;
+      border-top: none;
+      border-right: none;
+    }
+
+    .quadrant:nth-child(3) {
+      background: #f9fff9;
+      border-bottom: none;
+      border-left: none;
+    }
+
+    .quadrant:nth-child(4) {
+      background: #fffdf5;
+      border-bottom: none;
+      border-right: none;
+    }
+
+    .q-label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      color: #999;
+      margin-bottom: 3px;
+    }
+
+    .q-title {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1a3a5c;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #e63946;
+      margin-bottom: 7px;
+    }
+
+    /* ── Shared components ── */
+    ul.bullets {
+      list-style: none;
+      margin: 0;
+    }
+
+    ul.bullets li {
+      font-size: 8pt;
+      line-height: 1.45;
+      padding: 2.5px 0 2.5px 12px;
+      position: relative;
+      color: #222;
+      border-bottom: 0.5px solid #dde8f0;
+    }
+
+    ul.bullets li:last-child {
+      border-bottom: none;
+    }
+
+    ul.bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #e63946;
+      font-size: 7.5pt;
+      top: 3px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #1a3a5c;
+      color: #fff;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin: 2px 2px 0 0;
+    }
+
+    /* ── Q1 ── */
+    .callout {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 4px;
+      padding: 6px 9px;
+      font-size: 8.5pt;
+      font-style: italic;
+      line-height: 1.4;
+      margin-bottom: 7px;
+    }
+
+    .sig-box {
+      margin-top: 7px;
+      background: #e8f0f8;
+      border-left: 3px solid #1a3a5c;
+      padding: 5px 8px;
+      font-size: 7.5pt;
+      color: #1a3a5c;
+      line-height: 1.45;
+    }
+
+    /* ── Q2 ── */
+    .step {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 6px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      background: #e63946;
+      color: #fff;
+      font-size: 7pt;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 8pt;
+      line-height: 1.45;
+      color: #222;
+    }
+
+    .step-text strong {
+      color: #1a3a5c;
+    }
+
+    .model-row {
+      display: flex;
+      gap: 5px;
+      margin: 6px 0 6px 22px;
+    }
+
+    .model-box {
+      flex: 1;
+      border: 1.5px solid #c8d8e8;
+      border-radius: 4px;
+      padding: 4px 7px;
+      font-size: 7.5pt;
+      line-height: 1.4;
+    }
+
+    .model-box strong {
+      display: block;
+      color: #1a3a5c;
+      font-size: 8pt;
+      margin-bottom: 1px;
+    }
+
+    .tags-row {
+      margin: 4px 0 0 22px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Q3 ── */
+    .metrics-row {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+
+    .metric {
+      flex: 1;
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 4px;
+      padding: 5px 6px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 13pt;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-lbl {
+      font-size: 6.5pt;
+      color: #a8c4e0;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .finding-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-bottom: 6px;
+    }
+
+    .finding {
+      border: 1px solid #dde8f0;
+      border-radius: 4px;
+      padding: 5px 7px;
+      font-size: 7.5pt;
+      line-height: 1.4;
+    }
+
+    .finding strong {
+      display: block;
+      color: #e63946;
+      font-size: 7.5pt;
+      margin-bottom: 2px;
+    }
+
+    .conv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5pt;
+    }
+
+    .conv-table th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+      font-size: 7pt;
+      font-weight: 700;
+    }
+
+    .conv-table td {
+      padding: 2.5px 5px;
+      border-bottom: 0.5px solid #dde8f0;
+    }
+
+    .conv-table tr:nth-child(even) td {
+      background: #f0f6fc;
+    }
+
+    .yes {
+      color: #2a9d8f;
+      font-weight: 700;
+    }
+
+    .no {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    /* ── Q4 ── */
+    .c-item {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 5px;
+      padding-bottom: 5px;
+      border-bottom: 0.5px solid #e8e8d0;
+      align-items: flex-start;
+    }
+
+    .c-item:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .c-icon {
+      font-size: 10pt;
+      flex-shrink: 0;
+    }
+
+    .c-text {
+      font-size: 8pt;
+      line-height: 1.45;
+      color: #222;
+    }
+
+    .c-text strong {
+      color: #1a3a5c;
+    }
+
+    .lim-box {
+      background: #fff8e6;
+      border-left: 3px solid #e9c46a;
+      padding: 5px 8px;
+      font-size: 7.5pt;
+      color: #555;
+      line-height: 1.4;
+      margin-top: 7px;
+    }
+
+    .lim-box strong {
+      color: #7a5c00;
+    }
+
+    ul.future {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    ul.future li {
+      font-size: 7.5pt;
+      line-height: 1.4;
+      padding: 2px 0 2px 12px;
+      position: relative;
+      color: #444;
+    }
+
+    ul.future li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #2a9d8f;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="title-bar">
+    <h1>Linguistic Echoes: Explainable NLP for Academic Stress Detection</h1>
+    <div class="meta">
+      Arjun Pillai &nbsp;·&nbsp; Irvington High School, USA &nbsp;·&nbsp; HSS Track &nbsp;·&nbsp; NLP, Mental
+      Health &amp; Education
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Q1: Research Question -->
+    <div class="quadrant">
+      <div class="q-label">Quadrant 1</div>
+      <div class="q-title">Research Question</div>
+
+      <div class="callout">
+        Can explainable NLP recover meaningful psycholinguistic stress markers —
+        and do different academic communities express distress in distinct ways?
+      </div>
+
+      <ul class="bullets">
+        <li>Do XAI methods recover known psycholinguistic stress markers independently?</li>
+        <li>Which features best separate stressed from non-stressed writing?</li>
+        <li>Do undergrad, grad, and pre-med students show distinct stress profiles?</li>
+        <li>What are the ethical risks of automated stress detection in education?</li>
+      </ul>
+
+      <div class="sig-box">
+        <strong>Why it matters:</strong> 40%+ of university students report overwhelming anxiety.
+        Most support is reactive. Explainable NLP can surface early warning signals
+        and reveal how communities differ in expressing distress.
+      </div>
+    </div>
+
+    <!-- Q2: Methodology -->
+    <div class="quadrant">
+      <div class="q-label">Quadrant 2</div>
+      <div class="q-title">Methodology / Project Design</div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Data:</strong> Dreaddit (3,553 stress-annotated posts, balanced labels, 93 LIWC
+          features) for training. 8,000 posts from r/college, r/GradSchool, r/PhD, r/PreMed (Arctic Shift) for
+          inference.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Two models trained on Dreaddit:</strong></div>
+      </div>
+
+      <div class="model-row">
+        <div class="model-box">
+          <strong>TF-IDF + Logistic Regression</strong>
+          Unigrams/bigrams · balanced weights · interpretable coefficients
+        </div>
+        <div class="model-box">
+          <strong>Fine-tuned DistilBERT</strong>
+          3 epochs · AdamW · Tesla T4 GPU (Kaggle)
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Explainability (XAI):</strong></div>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag">LIWC psycholinguistic features</span>
+        <span class="tag">SHAP global attribution</span>
+        <span class="tag">LIME local explanation</span>
+      </div>
+
+      <div class="step" style="margin-top:7px;">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Statistical analysis:</strong> Mann-Whitney U tests · Benjamini-Hochberg FDR
+          correction (15 tests) · Cohen's d effect sizes · Spearman correlations</div>
+      </div>
+    </div>
+
+    <!-- Q3: Results -->
+    <div class="quadrant">
+      <div class="q-label">Quadrant 3</div>
+      <div class="q-title">Data Analysis &amp; Results</div>
+
+      <div style="background:#e63946;color:#fff;border-radius:5px;padding:7px 10px;margin-bottom:7px;">
+        <div
+          style="font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:0.8;margin-bottom:2px;">
+          Key Discovery</div>
+        <div style="font-size:8.5pt;font-weight:700;line-height:1.35;">Undergraduate communities show significantly
+          greater self-focused language; PhD communities show more relational language — all findings held after
+          Benjamini-Hochberg correction.</div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-val">d=0.33</div>
+          <div class="metric-lbl">College vs PreMed 1st-person effect size</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">0.874</div>
+          <div class="metric-lbl">DistilBERT ROC-AUC</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">ρ=0.53</div>
+          <div class="metric-lbl">1st-Person ↔ Stress Prob</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">12/15</div>
+          <div class="metric-lbl">Significant after BH correction</div>
+        </div>
+      </div>
+
+      <div class="finding-grid">
+        <div class="finding">
+          <strong>XAI Convergence</strong>
+          SHAP, LIME, and LIWC independently recovered the same markers:
+          <em>me/my/myself</em> and <em>anxiety/scared/feel</em> predict stress;
+          <em>you/we/her</em> predict non-stress.
+        </div>
+        <div class="finding">
+          <strong>Community Differences</strong>
+          r/college shows highest 1st-person singular rate
+          (d=0.328 vs PreMed, p&lt;0.001, BH-corrected).
+          PhD students show more social words (d=−0.126),
+          suggesting relational framing of distress.
+        </div>
+      </div>
+
+      <table class="conv-table">
+        <thead>
+          <tr>
+            <th>Marker</th>
+            <th>TF-IDF</th>
+            <th>SHAP</th>
+            <th>LIME</th>
+            <th>LIWC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>me / my / myself</td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td>lex_i ↑</td>
+          </tr>
+          <tr>
+            <td>anxiety / scared / feel</td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td><span class="yes">✓ Stress</span></td>
+            <td>lex_anx ↑</td>
+          </tr>
+          <tr>
+            <td>you / we / her</td>
+            <td><span class="no">Not stress</span></td>
+            <td><span class="no">Not stress</span></td>
+            <td><span class="no">Not stress</span></td>
+            <td>posemo ↑</td>
+          </tr>
+          <tr>
+            <td>Anxiety vocab alone</td>
+            <td colspan="4" style="color:#999; font-style:italic; font-size:7pt;">
+              Does NOT differentiate GradSchool vs PhD (p=0.677, ns after BH)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Q4: Conclusions -->
+    <div class="quadrant">
+      <div class="q-label">Quadrant 4</div>
+      <div class="q-title">Interpretation &amp; Conclusions</div>
+
+      <div class="c-item">
+        <div class="c-icon">🧠</div>
+        <div class="c-text"><strong>XAI recovers theory-grounded markers:</strong> SHAP, LIME, and LIWC independently
+          converged on first-person singular + negative emotion, matching Social Monitoring Theory.</div>
+      </div>
+
+      <div class="c-item">
+        <div class="c-icon">📊</div>
+        <div class="c-text"><strong>Communities express stress differently:</strong> College shows highest self-focus
+          (p&lt;0.001, d=0.38). PhD students use more relational language. Anxiety vocab alone is not diagnostic.</div>
+      </div>
+
+      <div class="c-item">
+        <div class="c-icon">⚠️</div>
+        <div class="c-text"><strong>19.3% false negative rate:</strong> Stress in third-person or retrospective voice is
+          systematically missed.</div>
+      </div>
+
+      <div class="lim-box">
+        <strong>Limitations:</strong> General Reddit data (domain shift) · Small-to-moderate effect sizes · No clinical
+        ground-truth labels
+      </div>
+
+      <ul class="future">
+        <li>Ground-truth labeled academic writing</li>
+        <li>Temporal stress modeling across a semester</li>
+        <li>Fairness audit across demographic groups</li>
+        <li>Investigate PhD relational framing vs suppression</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+
+</html>
