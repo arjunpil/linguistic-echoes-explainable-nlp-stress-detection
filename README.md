@@ -1,9 +1,10 @@
 # Linguistic Echoes: Explainable NLP for Academic Stress Detection
 
 **Project Track:** Humanities & Social Science (HSS)  
-**Competition:** IAI²O AI for Science (AI4Sci) 2026  
+**Competition:** IAI²O AI for Science (AI4Sci) 2026
 **Author:** Arjun Pillai  
 **School:** Irvington High School, USA
+**Result:** Second Place (Regional Finalist)
 
 ---
 
