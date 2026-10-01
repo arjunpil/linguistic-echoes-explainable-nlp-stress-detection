@@ -4,7 +4,7 @@
 **Competition:** IAI²O AI for Science (AI4Sci) 2026    
 **Author:** Arjun Pillai      
 **School:** Irvington High School, USA    
-**Result:** Second Place (Regional Finalist)   
+**Result:** Silver Medal  
 
 ---
 
